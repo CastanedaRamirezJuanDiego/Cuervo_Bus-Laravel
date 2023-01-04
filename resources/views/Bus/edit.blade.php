@@ -13,8 +13,6 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Bus Editar</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> Generate Reporte</a>
 </div>
 
 <!-- Content Row -->
@@ -32,10 +30,13 @@
                 
             <form action="{{url('Bus/' .$Bus->id) }}" method="post">
             {!! csrf_field() !!}
+            @include('components.flash_alerts') 
             @method("PATCH")
                <label for=""> Matricula:</label>
                 <input class="form-control" type="Text" value="{{$Bus->Matricula}}" name="Matricula">
-
+                @error('Matricula')
+                <small class="form-text text-danger">{{$message}}</small>
+                @enderror 
                 <label for=""> DRIVER :</label>
                 <select class="form-control form-select" aria-label="Default select example" id="Driver_id" name="Driver_id" value="{{$Bus->Driver_id}}">
                     <option selected>Elige el conductor</option>
@@ -47,9 +48,10 @@
 
                 <div class="row">
                  <a class="btn btn-danger m-3"  href="/Bus" >Cancelar</a>
-                <button type="submit" class="btn btn-primary m-3">Guadar</button>
-
+                 <button type="submit" class="btn btn-primary m-3" value="update">Aceptar</button>
+                
                 </div>
+
             </form>
             </div>
         </div>

@@ -32,9 +32,9 @@ class TrajectoryController extends Controller
     //
      $Trajectory = Trajectory::findOrFail($id);
         $rules =[
-            'Name_Trajectory'=> '',
-            'Length' =>'',
-            'Latitude' =>''
+            'Name_Trajectory'=> 'required|min:10',
+            'Length' =>'required|min:10',
+            'Latitude' =>'required|min:10'
         ];
 
         $this->validate($request, $rules);
@@ -47,10 +47,17 @@ class TrajectoryController extends Controller
     public function destroy($id)
    {
     //
-    $Trajectory = Trajectory::findOrFail($id);
+   $Trajectory = Trajectory::find($id);
 
-    $Trajectory->delete();
-    return redirect('Trajectory')->with('danger','correctamente la Trajectory');
+        if(is_null($Trajectory)){
+
+            return  redirect()->route('Trajectory.index');
+
+        }
+
+        $Trajectory->delete();
+
+        return  redirect()->route('Trajectory.index');
    }
 
 
@@ -58,18 +65,24 @@ class TrajectoryController extends Controller
    public function store(Request $request)
    {
     //
+
+
+    
     $rules =[
-      'Name_Trajectory'=> '',
-      'Length' =>'',
-      'Latitude' =>''
+      'Name_Trajectory'=> 'required|min:10|unique:Trajectories',
+      'Length' =>'required|min:10',
+      'Latitude' =>'required|min:10'
   ];
 
   $message = [
-      'Name_Trajectory.required' => '',
-      'Length.required' => '',
-      'Latitude.required' => ''
+      'Name_Trajectory.required' => 'El campo  esta vacio',
+      'Length.required' => 'El campo  esta vacio',
+      'Latitude.required' => 'El campo  esta vacio'
   ];
 
+
+  
+  
   $this->validate($request, $rules, $message);
   $input=$request->all();
   Trajectory::create($input);

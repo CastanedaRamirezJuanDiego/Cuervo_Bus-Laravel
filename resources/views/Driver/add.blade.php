@@ -13,8 +13,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Driver Altas</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    
 </div>
 
 
@@ -35,33 +34,56 @@
             </div>
             <div class="card-body">
                 
-                <form action="{{ url('Driver') }}" method="post">
-                    @csrf
+                <form action="{{ url('Driver') }}"  enctype="multipart/form-data" method="post">
+                  {!! csrf_field() !!}
+                    @include('components.flash_alerts') 
                     <label > Name </label>
-                    <input class="form-control" type="text"  name="Name_Driver">
+                    <input class="form-control" type="text"  name="Name_Driver" id="Name_Driver" value="{{old('Name_Driver')}}" >
+                    @error('Name_Driver')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <label for=""> Email:</label>
-                    <input class="form-control" type="Email" name="Email">
+                    <input class="form-control" type="Email" name="Email" id="Email" value="{{old('Email')}}" >
+                    @error('Email')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <label for=""> Password:</label>
-                    <input class="form-control" type="Password" name="Password">
+                    <input class="form-control" type="Password" name="Password" id="Password" value="{{old('Password')}}">
+                    @error('Password')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <label for=""> Phone_Number:</label>
-                    <input class="form-control" type="phone" name="Phone_Number">
+                    <input class="form-control" type="Number" name="Phone_Number" id="Phone_Number" value="{{old('Phone_Number')}}">
+                    @error('Phone_Number')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <label for=""> Age:</label>
-                    <input class="form-control" type="number" name="Age">
+                    <input class="form-control" type="number" name="Age"  id="Age" value="{{old('Age')}}">
+                    @error('Age')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <label for=""> License:</label>
-                    <input class="form-control" type="text" name="License">
-            
+                    <input class="form-control" type="file" name="License" id="License" value="{{old('License')}}">
                     <label for=""> Centrar:</label>
-                    <select class="form-control form-select" aria-label="Default select example" name="Center_id">
-                        <option selected>Elige el Cuatrimestre</option>
+                    <select class="form-control form-select" aria-label="Default select example" name="Center_id" id="Center_id" value="{{old('Center_id')}}">
+                        <option selected>Elige el la central</option>
                         @foreach($Center as $Center)  
                         <option value={{$Center->id}}>{{$Center->Center}}</option>
                            @endforeach
                         </select>
+                        <button type="submit" class="btn btn-primary m-3"  value="save">Aceptar</button>
                         <div class="row">
-                            <button type="submit" class="btn btn-primary m-3">Guadar</button>
-         
-                         </div>
-             </form> 
+                         
+        </div>
+            </div>
+        </div>
+     </div>
+    
+    
+    
+    
+    
+    <!-- end nodal  -->
             </div>
         </div>
 

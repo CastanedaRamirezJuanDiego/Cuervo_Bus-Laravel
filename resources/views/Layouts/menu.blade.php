@@ -26,36 +26,36 @@
 <li class="nav-item active3">
     <a class="nav-link" href="/User">
         <i class="fa-solid fa-user"></i>
-    <span>User</span></a>
+    <span>Usuarios</span></a>
 </li>
 <li class="nav-item active1">
     <a class="nav-link" href="/Driver">
         <i class="fa-solid fa-id-card"></i>
-    <span>Driver</span></a>
+    <span>Conductores</span></a>
 </li>
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active2">
     <a class="nav-link" href="/Bus">
         <i class="fa-duotone fa-bus"></i>
-    <span>Bus</span></a>
+    <span>AutoBuses</span></a>
 </li>
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active3">
     <a class="nav-link" href="/Direction">
         <i class="fa-solid fa-compass"></i>
-    <span>Direction</span></a>
+    <span>Direcciones</span></a>
 </li>
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active2">
     <a class="nav-link" href="/Trajectory">
         <i class="fa-solid fa-route"></i>
-    <span>Trajectory</span></a>
+    <span>Trajectorias</span></a>
 </li>
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active3">
     <a class="nav-link" href="/Truck_stop">
         <i class="fa-solid fa-traffic-light"></i>
-    <span>Truck stop</span></a>
+    <span>Paradas de Autobus</span></a>
 </li>
 
 
@@ -85,21 +85,7 @@
             <i class="fa fa-bars"></i>
         </button>
 
-        <!-- Topbar Search -->
-        <form
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                    aria-label="Search" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-
-                </a>
+      
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown">

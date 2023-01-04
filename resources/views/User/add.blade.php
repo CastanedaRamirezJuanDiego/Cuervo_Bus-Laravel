@@ -13,8 +13,6 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Acount Altas</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
 </div>
 
 
@@ -35,46 +33,61 @@
             </div>
             <div class="card-body">
                 
-                <form action="{{ url('User') }}" method="post">
+                <form action="{{ url('User') }}" method="post"  enctype="multipart/form-data">
                     @csrf
+                    @include('components.flash_alerts') 
                     <label > Name </label>
                     <input class="form-control" type="text"  name="Name">
+                    @error('Name')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <label > Email </label>
                     <input class="form-control" type="Email"  name="Email">
+                    @error('Email')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <label > Password </label>
                     <input class="form-control" type="Password"  name="Password">
+                    @error('Password')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <label for=""> Img_User:</label>
-                    <input class="form-control" type="img" name="Img_User">
+                    <input class="form-control" type="file" name="Img_User" required>
+                    @error('Img_User')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <label for=""> Matricula:</label>
                     <input class="form-control" type="number" name="Matricula">
+                    @error('Matricula')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     
                     <label for=""> Cuatrimeste:</label>
                     
-                    <select class="form-control form-select" aria-label="Default select example" name="Cuatrimestre_id">
-                        <option selected>Elige el Cuatrimestre</option>
+                    <select class="form-control form-select" aria-label="Default select example" name="Cuatrimestre_id" required data-live-search="true">
+                        <option value="">Elige el Cuatrimestre</option>
                         @foreach($Cuatrimeste as $Cuatrimeste)  
                         <option value={{$Cuatrimeste->id}}>{{$Cuatrimeste->Cuatrimestre}}</option>
                            @endforeach
                         </select>
                     
                     <label for=""> Direction:</label>
-                    <select class="form-control form-select" aria-label="Default select example" name="Direction_id">
-                            <option selected>Elige la Direction</option>
+                    <select class="form-control form-select" aria-label="Default select example" name="Direction_id" required data-live-search="true" >
+                            <option value="">Elija la direccion</option>
                             @foreach($Direction as $Direction)  
                             <option value={{$Direction->id}}>{{$Direction->Name_Direction}}</option>
                                @endforeach
                             </select> 
 
                      <label for=""> Trajectory:</label>
-                    <select class="form-control form-select" aria-label="Default select example" name="Trajectory_id">
-                             <option selected>Elige la Trajectory </option>
+                    <select class="form-control form-select" aria-label="Default select example" name="Trajectory_id" required data-live-search="true">
+                             <option value="">Elija la Trajectoria </option>
                              @foreach($Trajectory as $Trajectory)  
                              <option value={{$Trajectory->id}}>{{$Trajectory->Name_Trajectory}}</option>
                               @endforeach
                             </select> 
                     <div class="row">
-                       <button type="submit" class="btn btn-primary m-3">Guadar</button>
-    
+                        <button type="submit" class="btn btn-primary m-3">Aceptar</button>
                     </div>
         </form> 
             </div>

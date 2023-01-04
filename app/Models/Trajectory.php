@@ -18,7 +18,7 @@ class Trajectory extends Model
     ];
 
     public function User(){
-        return $this->hasOne(User::class, 'Trajectory_id','id');
+        return $this->hasOne(User::class);
 }
         
   

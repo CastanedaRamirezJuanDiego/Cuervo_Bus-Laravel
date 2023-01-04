@@ -14,6 +14,12 @@
 <!-- Page Heading -->
 
 <!-- Content Row -->
+@if(Session::has('message'))
+<h6 class="alert alert-success">{{
+Session::get('message')}}
+</h6>
+@endif
+
 
 
 
@@ -59,13 +65,13 @@
                         <div class="card-body">
                            
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <table class="table table-striped" id="dataTable">
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th>ID</th>
                                             <th>Name_Driver</th>
                                             <th>Email</th>
-                                            <th>Password</th>
+                                
                                             <th>Phone_Number</th>
                                             <th>Age</th>
                                             <th>License</th>
@@ -78,7 +84,7 @@
                                              <th>ID</th>
                                             <th>Name_Driver</th>
                                             <th>Email</th>
-                                            <th>Password</th>
+                                          
                                             <th>Phone_Number</th>
                                             <th>Age</th>
                                             <th>License</th>
@@ -92,22 +98,37 @@
                                             <td>{{$Driver->id}}</td>
                                             <td>{{$Driver->Name_Driver}}</td>
                                             <td>{{$Driver->Email}}</td>
-                                            <td>{{$Driver->Password}}</td>
+                                        
                                             <td>{{$Driver->Phone_Number}}</td>
                                             <td>{{$Driver->Age}}</td>
-                                            <td>{{$Driver->License}}</td>
-                                            <td>{{$Driver->Center->Center}}</td>
+                                            <td><img src="{{asset('storage').'/'.$Driver->License}}" alt="" width="50" height="50"></td>
+                                            <td>{{$Driver->Center}}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                                    <a class="btn btn-success m-3" href="Driver/{{$Driver->id}}" ><i class="fa-regular fa-eye"></i></a>
-                                                    <a class="btn btn-warning m-3" href="Driver/{{$Driver->id}}/edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                    <a class="btn btn-outline-info" href="Driver/{{$Driver->id}}" ><i class="fa-regular fa-eye"></i></a>
+                                                    <a class="btn btn-outline-warning" href="Driver/{{$Driver->id}}/edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                    <a href="" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalCenter{{$Driver->id}}"><i class="fa-solid fa-trash"></i></a>
+                                    <!------ ESTE ES EL MODAL QUE SE MUESTRA AL DAR CLICK EN EL BOTON "ELIMINAR" ------>
+                                    <div class="modal fade" id="exampleModalCenter{{$Driver->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header d-flex justify-content-center">
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="text-center">Está seguro(a) de eliminar al conductor {{$Driver->id}}?</p>
+                                                </div>
+                                                <div class="modal-footer d-flex justify-content-center">
+                                                    <button type="button" class="btn btn-secondary btn-default" data-dismiss="modal">Cancelar</button>
                                                     <form action="Driver/{{$Driver->id}}" method="POST">
-                                                    {!! csrf_field() !!}
-                                                    @method("delete")
-                                                        
-                                                    <button class="btn btn-danger m-3" type="submit"><i class="fa-solid fa-trash"></i></button>
-                                                    </form>
-                                                    <!-- <a class="btn btn-danger m-3" data-toggle="modal" data-target="#logoutModal"><i class="fa-solid fa-trash"></i></a> -->
+                                                        {!! csrf_field() !!}
+                                                        @method("delete")
+                                                            
+                                                        <button class="btn btn-danger m-3" type="submit">Aceptar</button>
+                                                        </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--fin modal-->
                                         </div>            
                                             </td>
                                         </tr> 

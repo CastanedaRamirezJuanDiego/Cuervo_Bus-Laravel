@@ -23,6 +23,9 @@ class CuatrimesteController extends Controller
     {
        return view('Cuatrimeste.add');
     }
+
+
+    
     public function show($id)
     {
       $Cuatrimeste = Cuatrimeste::find($id);
@@ -51,20 +54,19 @@ class CuatrimesteController extends Controller
     public function destroy($id)
    {
     //
-    $Cuatrimeste = Cuatrimeste::findOrFail($id);
-    $Cuatrimeste->delete();
-    return redirect('Cuatrimeste')->with('danger','correctamente la Trajectory');
+    $Cuatrimeste = Cuatrimeste::findOrFail($id)->delete();
+    return redirect()->route('Cuatrimeste.index');
    }
 
 
    public function store(Request $request)
    {
     $rules =[
-      'Cuatrimestre'=> ''
+      'Cuatrimestre'=> 'required|min:10|unique:Cuatrimestes'
   ];
 
   $message = [
-      'Cuatrimestre.required' => ''
+      'Cuatrimestre.required' => 'El campo esta vacio'
   ];
 
   $this->validate($request, $rules, $message);

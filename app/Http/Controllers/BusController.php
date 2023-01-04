@@ -9,7 +9,10 @@ class BusController extends Controller
 {
    public function index()
    {
-       $Bus = Bus::all();
+       $Bus = Bus::Select('buses.id'
+       ,'buses.Matricula',
+       'drivers.Name_Driver')
+       ->join('drivers','drivers.id','buses.Driver_id')->get();
       return view('Bus.index', compact('Bus'));
    }
     
@@ -24,12 +27,16 @@ class BusController extends Controller
     }
     public function create()
     {
+      
       $Driver = Driver::all();
        return view('Bus.add',compact('Driver'));
     }
     public function show($id)
     {
-      $Bus = Bus::find($id);
+      $Bus = Bus::Select('buses.id'
+      ,'buses.Matricula',
+      'drivers.Name_Driver')
+      ->join('drivers','drivers.id','buses.Driver_id')->first();
       return view('Bus.show')->with('Bus',$Bus);
 
     }
@@ -51,23 +58,30 @@ class BusController extends Controller
     public function destroy($id)
    {
     //
-    $Bus = Bus::findOrFail($id);
+      //
+      $Bus = Bus::find($id);
 
-    $Bus->delete();
-    return redirect('Bus')->with('danger','correctamente la cara de diego :))))');
+      if(is_null($Bus)){
+
+          return  redirect()->route('Bus.index');
+
+      }
+
+      $Bus->delete();
+    return redirect()->route('Bus.index');
    
    }
    public function store(Request $request)
    {
     //
     $rules =[
-      'Matricula'=> '',
+      'Matricula'=> 'required|min:10|unique:Buses',
       'ID_Driver' =>''
   ];
 
   $message = [
-      'Matricula.required' => '',
-      'ID_Driver.required' => ''
+      'Matricula.required' => 'El Campo esta vacio',
+      'ID_Driver.required' => 'El campo esta cavio'
   ];
 
   $this->validate($request, $rules, $message);

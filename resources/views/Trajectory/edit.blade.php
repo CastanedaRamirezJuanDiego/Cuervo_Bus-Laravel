@@ -38,15 +38,24 @@
                 @method("PATCH")
                 <label> Name_Trajectory:</label>
                 <input class="form-control" type="text" name="Name_Trajectory" id="Name_Trajectory"  value="{{$Trajectory->Name_Trajectory}}">
+                @error('Name_Trajectory')
+                <small class="form-text text-danger">{{$message}}</small>
+                @enderror 
                 <label> Length:</label>
                 <input class="form-control" type="number" name="Length" id="Length" value="{{$Trajectory->Length}}">
+                @error('Length')
+                <small class="form-text text-danger">{{$message}}</small>
+                @enderror 
                 <label> Latitude:</label>
                     <input class="form-control" type="number" name="Latitude" id="Latitude" value="{{$Trajectory->Latitude}}">
+                    @error('Latitude')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <div class="row">
                     <a class="btn btn-danger m-3"  href="/Trajectory" >Cancelar</a>
-                    <button type="submit" class="btn btn-primary m-3" value="update">Guadar</button>
-
+                    <button type="submit" class="btn btn-primary m-3" value="update">Aceptar</button>
                 </div>
+
             </form>
             </div>
         </div>

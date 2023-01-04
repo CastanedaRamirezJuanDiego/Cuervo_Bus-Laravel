@@ -15,6 +15,6 @@ class Center extends Model
 'Center',
     ];
     public function Driver(){
-        return $this->hasOne(User::class, 'Center_id','id');
+        return $this->hasOne(User::class);
     }
 }

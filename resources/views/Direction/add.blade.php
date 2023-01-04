@@ -34,12 +34,15 @@
             <div class="card-body">
                 
                 <form action="{{ url('Direction') }}" method="post">
-                    @csrf
+                    {!! csrf_field() !!}
+                    @include('components.flash_alerts') 
                     <label > Name Direction:</label>
                     <input class="form-control" type="text"  name="Name_Direction">
+                    @error('Name_Direction')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <div class="row">
-                        <button type="submit" class="btn btn-primary m-3">Guadar</button>
-    
+                        <button type="submit" class="btn btn-primary m-3">Aceptar</button>
                     </div>
         </form>
             </div>

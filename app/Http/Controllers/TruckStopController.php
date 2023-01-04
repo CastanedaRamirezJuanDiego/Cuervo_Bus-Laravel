@@ -32,9 +32,9 @@ class TruckstopController extends Controller
     //
      $Truck_stop = Truck_stop::findOrFail($id);
         $rules =[
-            'Name_Truck_stop'=> '',
-            'Length' =>'',
-            'Latitude' =>''
+          'Name_Truck_stop'=> 'required|min:10',
+          'Length' =>'required|min:10',
+          'Latitude' =>'required|min:10'
         ];
 
         $this->validate($request, $rules);
@@ -47,10 +47,16 @@ class TruckstopController extends Controller
     public function destroy($id)
    {
     //
-    $Truck_stop = Truck_stop::findOrFail($id);
+    $Truck_stop = Truck_stop::find($id);
+
+    if(is_null($Truck_stop)){
+
+        return  redirect()->route('Truck_stop.index');
+
+    }
 
     $Truck_stop->delete();
-    return redirect('Truck_stop')->with('danger','correctamente ');
+    return redirect()->route('Truck_stop.index');
   
    }
 
@@ -58,15 +64,15 @@ class TruckstopController extends Controller
    {
     //
     $rules =[
-      'Name_Truck_stop'=> '',
-        'Length' =>'',
-        'Latitude' =>''
+      'Name_Truck_stop'=> 'required|min:10|unique:Truck_stops',
+        'Length' =>'required|min:10',
+        'Latitude' =>'required|min:10'
   ];
 
   $message = [
-   'Name_Truck_stop.required'=> '',
-   'Length.required' =>'',
-   'Latitude.required' =>''
+   'Name_Truck_stop.required'=> 'El campo  esta vacio',
+   'Length.required' =>'El campo  esta vacio',
+   'Latitude.required' =>'El campo  esta vacio'
   ];
 
   $this->validate($request, $rules, $message);

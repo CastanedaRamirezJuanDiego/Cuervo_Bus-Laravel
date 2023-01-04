@@ -21,13 +21,13 @@ class User extends Model
     ];
     
     public function Cuatrimeste(){
-        return $this->belongsTo(Cuatrimeste::class,'Cuatrimestre_id');
+        return $this->belongsTo(Cuatrimeste::class);
     }
     public function Direction(){
-        return $this->belongsTo(Direction::class,'Direction_id');
+        return $this->belongsTo(Direction::class);
     }
 
     public function Trajectory(){
-        return $this->belongsTo(Trajectory::class,'Trajectory_id');
+        return $this->belongsTo(Trajectory::class);
     } 
 }

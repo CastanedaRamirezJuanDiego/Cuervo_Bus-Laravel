@@ -25,8 +25,7 @@ class DirectionController extends Controller
     public function show($id)
     {
       $Direction = Direction::find($id);
-      return $Direction;
-      return view('Direction.show');
+      return view('Direction.show')->with('Direction',$Direction);
     }
     public function update(Request $request, $id)
     {
@@ -45,21 +44,27 @@ class DirectionController extends Controller
     public function destroy($id)
    {
     //
-    $Direction = Direction::findOrFail($id);
+    $Direction = Direction::find($id);
 
-    $Direction->delete();
-    return redirect('Direction')->with('danger','correctamente ');
+        if(is_null($Direction)){
+
+            return  redirect()->route('Direction.index');
+
+        }
+
+        $Direction->delete();
+    return redirect()->route('Direction.index');
   
    }
    public function store(Request $request)
    {
     //
     $rules =[
-      'Name_Direction'=> ''
+      'Name_Direction'=> 'required|min:10|unique:Directions'
   ];
 
   $message = [
-      'Name_Direction.required' => ''
+      'Name_Direction.required' => 'El campo esta vacio'
   ];
 
   $this->validate($request, $rules, $message);

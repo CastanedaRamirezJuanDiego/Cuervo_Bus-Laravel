@@ -35,9 +35,27 @@
                 <label for=""> Cuatrimestre :</label>
                 <input class="form-control" type="Text" value="" name="Cuatrimestre">
                 <div class="row">
-                    <button type="submit" class="btn btn-primary m-3">Guadar</button>
-
+                    <button type="button" class="btn btn-primary m-3" data-toggle="modal" data-target="#exampleModal"> Guardar</button>
                 </div>
+                <!-- Star nodal  -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+     <div class="modal-header">
+        <h5 class="modal-title" id="ExampleModalLabel">Se guardo Con Exito</h5>
+     </div>
+     <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary m-3">Aceptar</button>
+</div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+<!-- end nodal  -->
             </form>
             </div>
         </div>

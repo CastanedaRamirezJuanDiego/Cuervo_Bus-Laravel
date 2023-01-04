@@ -16,7 +16,7 @@ class Bus extends Model
 'Driver_id'
     ];
     public function Driver(){
-        return $this->belongsTo(Driver::class,'Driver_id');
+        return $this->belongsTo(Driver::class);
     }
 
     public function Detail(){

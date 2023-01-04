@@ -13,8 +13,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Acount Editar</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    
 </div>
 
 
@@ -42,9 +41,28 @@
                     <input class="form-control" type="text" name="Name_Direction" id="Name_Direction"  value="{{$Direction->Direction}}">
                    <div class="row">
                         <a class="btn btn-danger m-3"  href="/Direction" >Cancelar</a>
-                        <button type="submit" class="btn btn-primary m-3" value="update">Guadar</button>
-    
+                        <button type="button" class="btn btn-primary m-3" data-toggle="modal" data-target="#exampleModal"> Guardar</button>
                     </div>
+                    <!-- Star nodal  -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="ExampleModalLabel">Se Actualizo Con Exito</h5>
+         </div>
+         <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary m-3" value="update">Aceptar</button>
+    </div>
+        </div>
+    </div>
+ </div>
+
+
+
+
+
+<!-- end nodal  -->
+
                 </form>
             </div>
         </div>

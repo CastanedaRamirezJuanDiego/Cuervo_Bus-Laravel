@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->String('Name',80);
-            $table->String('Img_User',100);
-            $table->String('Email',100);
+            $table->String('Img_User');
+            $table->String('Email',100)->unique();
             $table->String('Password',100);
             $table->double('Matricula',30);
             $table->integer('Cuatrimestre_id')->unsigned();

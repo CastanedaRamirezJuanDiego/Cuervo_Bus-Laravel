@@ -12,7 +12,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Trajectory Editar</h1>
+    <h1 class="h3 mb-0 text-gray-800">Cuatrimestre Editar</h1>
 </div>
 
 
@@ -33,20 +33,35 @@
             </div>
             <div class="card-body">
                 
-            <form action="{{url('Trajectory/' .$Trajectory->id) }}" method="post">
+            <form action="{{url('Cuatrimeste/' .$Cuatrimeste->id) }}" method="post">
                 {!! csrf_field() !!}
                 @method("PATCH")
-                <label> Nombre:</label>
-                <input class="form-control" type="text" name="name" id="name"  value="{{$Trajectory->Name_Trajectory}}">
-                <label> Descripción:</label>
-                <input class="form-control" type="text" name="description" id="description" value="{{$Trajectory->Length}}">
-                <div class="row">
-                    <input class="form-control" type="text" name="description" id="description" value="{{$Trajectory->Latitude}}">
+                <label> Cuatrimestre:</label>
+                <input class="form-control" type="text" name="Cuatrimestre" id="Cuatrimestre"  value="{{$Cuatrimeste->Cuatrimestre}}">
                     <div class="row">
-                    <a class="btn btn-danger m-3"  href="/Trajectory" >Cancelar</a>
-                    <button type="submit" class="btn btn-primary m-3" value="update">Guadar</button>
-
+                    <a class="btn btn-danger m-3"  href="/Cuatrimeste" >Cancelar</a>
+                    <button type="button" class="btn btn-primary m-3" data-toggle="modal" data-target="#exampleModal"> Guardar</button>
                 </div>
+                <!-- Star nodal  -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+     <div class="modal-header">
+        <h5 class="modal-title" id="ExampleModalLabel">Se Actualizo Con Exito</h5>
+     </div>
+     <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary m-3" value="update">Aceptar</button>
+</div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+<!-- end nodal  -->
+
             </form>
             </div>
         </div>

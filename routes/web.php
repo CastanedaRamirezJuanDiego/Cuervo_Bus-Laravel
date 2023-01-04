@@ -11,11 +11,10 @@ use App\Http\Controllers\DriverController;
 use App\Http\Controllers\TrajectoryController;
 use App\Http\Controllers\TruckstopController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\inicioController;
 
+route::get('/',[App\Http\Controllers\inicioController::class,'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::resource('Bus', BusController::class);
 
 Route::resource('Center', CenterController::class);

@@ -20,10 +20,10 @@ class Driver extends Model
         'Center_id'
     ];
     public function Center(){
-        return $this->belongsTo(Center::class,'Center_id');
+        return $this->belongsTo(Center::class);
     }
     public function Bus(){
-        return $this->HasOne(Bus::class, 'Driver_id','id');
+        return $this->hasOne(Bus::class);
     }
    
 }

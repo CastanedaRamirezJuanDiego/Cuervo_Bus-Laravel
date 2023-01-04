@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Cuatrimeste;
 use App\Models\Direction;
 use App\Models\Trajectory;
+
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -12,7 +13,17 @@ class UserController extends Controller
     //
     public function index()
     {
-      $User = User::all();
+      $User = User::Select('users.id','users.Name',
+      'users.Img_User',
+      'users.Email',
+      'users.Password',
+      'users.Matricula',
+      'Cuatrimestes.Cuatrimestre',
+      'Directions.Name_Direction',
+      'Trajectories.Name_Trajectory')
+      ->join('Cuatrimestes','Cuatrimestes.id','users.Cuatrimestre_id')
+      ->join('Directions','Directions.id','users.Direction_id')
+      ->join('Trajectories','Trajectories.id','users.Trajectory_id')->get();
       return view('User.index', compact('User'));
     }
     public function edit($id)
@@ -35,26 +46,38 @@ class UserController extends Controller
     }
     public function show($id)
     {
-
-       $User = User::find($id);
-       return view('User.show')->with('User',$User);
+      
+      $User = User::Select('users.id','users.Name',
+      'users.Img_User',
+      'users.Email',
+      'users.Password',
+      'users.Matricula',
+      'Cuatrimestes.Cuatrimestre',
+      'Directions.Name_Direction',
+      'Trajectories.Name_Trajectory')
+      ->join('Cuatrimestes','Cuatrimestes.id','users.Cuatrimestre_id')
+      ->join('Directions','Directions.id','users.Direction_id')
+      ->join('Trajectories','Trajectories.id','users.Trajectory_id')->find($id);
+      return view('User.show')->with('User',$User);
    
     }
     public function update(Request $request, $id)
     {
     //
-    $User = User::findOrFail($id);
+   
+    $User = User::find($id);
     $rules =[
-        'Name'=> '',
-        'Img_User' =>'',
-        'Email' =>'',
-        'Password' =>'',
-        'Matricula'=> '',
-        'Cuatrimestre_id'=> '',
-        'Direction_id' =>'',
-        'Trajectory_id'=> ''
+      'Name'=> 'required|min:10',
+      'Email' =>'required|min:10',
+      'Password' =>'required|min:10',
+      'Matricula'=> 'required|min:10',
+      'Cuatrimestre_id' =>'required',
+      'Direction_id'=> 'required',
+      'Trajectory_id'=> 'required'
     ];
-
+    if($request->hasFile('Img_User')){
+      $User['Img_User']=$request->file('Img_User')->update('image');
+    }
     $this->validate($request, $rules);
     $input=$request->all();
     $User->update($input);
@@ -64,40 +87,45 @@ class UserController extends Controller
     public function destroy($id)
    {
     //
-    $User = User::findOrFail($id);
+    $User = User::find($id);
 
-    $User->delete();
-    return redirect('User')->with('danger','correctamente ');
-  
+        if(is_null($User)){
+
+            return  redirect()->route('User.index');
+
+        }
+
+        $User->delete();
+    return redirect()->route('User.index');
    }
    public function store(Request $request)
    {
-    //
-    $rules =[
-      'Name'=> '',
-      'Img_User' =>'',
-      'Email' =>'',
-      'Password' =>'',
-      'Matricula'=> '',
-      'Cuatrimestre_id'=> '',
-      'Direction_id' =>'',
-      'Trajectory_id'=> ''
-  ];
+    // 
+    $request->validate([
+      'Name'=> 'required|min:10',
+      'Email' =>'required|Email|unique:Users',
+      'Password' =>'required|min:10',
+      'Matricula'=> 'required|min:10',
+      'Img_User' => '',
+      'Cuatrimestre_id' =>'required',
+      'Direction_id'=> 'required',
+      'Trajectory_id'=> 'required'
+  ]);
+  $image_path = '';
+  if ($request->hasFile('Img_User')) {
+      $image_path = $request->file('Img_User')->store('image', 'public');
+  }
+  User::create([
+      'Name' => $request->Name,
+      'Email' => $request->Email,
+      'Password' => $request->Password,
+      'Matricula' => $request->Matricula,
+      'Img_User' => $image_path,
+      'Cuatrimestre_id' => $request->Cuatrimestre_id,
+      'Direction_id' => $request->Direction_id,
+      'Trajectory_id' => $request->Trajectory_id,
+  ]);
 
-  $message = [
-   'Name.required'=> '',
-   'Img_User.required' =>'',
-   'Email.required' =>'',
-   'Password.required' =>'',
-   'Matricula.required'=> '',
-   'Cuatrimestre_id.required'=> '',
-   'Direction_id.required' =>'',
-   'Trajectory_id.required'=> ''
-  ];
-
-  $this->validate($request, $rules, $message);
-  $input=$request->all();
-  User::create($input);
   return redirect('User')->with('message','Se ha creado correctamente');
 
    }

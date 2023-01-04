@@ -13,8 +13,6 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Bus Altas</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
 </div>
 
 
@@ -37,19 +35,23 @@
                 
             <form action="{{ url('Bus') }}" method="post" >
                 @csrf
+                @include('components.flash_alerts') 
                 <label for=""> Matricula:</label>
-                <input class="form-control" type="Text" value="" name="Matricula">
-                <div class="row">
-                    <select class="form-control form-select" aria-label="Default select example" name="Driver_id">
+                <input class="form-control" type="Text" value="" name="Matricula" required="required">
+                @error('Matricula')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
+                    <select class="form-control form-select" aria-label="Default select example" name="Driver_id" required="required">
                         <option selected>Elija al conductor</option>
                         @foreach($Driver as $Driver)  
                         <option value={{$Driver->id}}>{{$Driver->Name_Driver}}</option>
                            @endforeach
                         </select>
                         <div class="row">
-                    <button type="submit" class="btn btn-primary m-3">Guadar</button>
-
-                </div>
+                            <button type="submit" class="btn btn-primary m-3">Aceptar</button>
+        
+                        </div>
+                    
             </form>
             </div>
         </div>

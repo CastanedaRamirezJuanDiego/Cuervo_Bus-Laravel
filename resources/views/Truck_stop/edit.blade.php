@@ -13,8 +13,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Acount Editar</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+ 
 </div>
 
 
@@ -37,18 +36,28 @@
                 
                 <form action="{{url('Truck_stop/' .$Truck_stop->id) }}" method="post">
                     {!! csrf_field() !!}
+                    @include('components.flash_alerts') 
                     @method("PATCH")
                     <label> Truck_stop:</label>
                     <input class="form-control" type="text" name="Name_Truck_stop" id="Name_Truck_stop"  value="{{$Truck_stop->Name_Truck_stop}}">
+                    @error('Name_Truck_stop')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <label> Length:</label>
                     <input class="form-control" type="number" name="Length" id="Length" value="{{$Truck_stop->Length}}">
+                    @error('Length')
+                    <small class="form-text text-danger">{{$message}}</small>
+                    @enderror 
                     <label> Latitude:</label>
-                        <input class="form-control" type="number" name="Latitude" id="Latitude" value="{{$Truck_stop->Latitude}}">
+                        <input class="form-control" type="number" name="c" id="Latitude" value="{{$Truck_stop->Latitude}}">
+                        @error('Length')
+                        <small class="form-text text-danger">{{$message}}</small>
+                        @enderror 
                         <div class="row">
                         <a class="btn btn-danger m-3"  href="/Truck_stop" >Cancelar</a>
-                        <button type="submit" class="btn btn-primary m-3" value="update">Guadar</button>
-    
+                        <button type="submit" class="btn btn-primary m-3" value="update">Aceptar</button>
                     </div>
+
                 </form>
             </div>
         </div>

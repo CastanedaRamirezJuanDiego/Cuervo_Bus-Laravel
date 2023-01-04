@@ -13,7 +13,11 @@
 
 <!-- Page Heading -->
 
-
+@if(Session::has('message'))
+<h6 class="alert alert-success">{{
+Session::get('message')}}
+</h6>
+@endif
 
 
 
@@ -58,14 +62,14 @@
                         <div class="card-body">
                            
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <table class="table table-striped" id="dataTable" >
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Img_User</th>
                                             <th>Email</th>
-                                            <th>Password</th>
+                                           
                                             <th>Matricula</th>
                                             <th>Cuatrimestre</th>
                                             <th>Direction</th>
@@ -80,7 +84,7 @@
                                             <th>Name</th>
                                             <th>Img_User</th>
                                             <th>Email</th>
-                                            <th>Password</th>
+                                           
                                             <th>Matricula</th>
                                             <th>Cuatrimestre</th>
                                             <th>Direction</th>
@@ -94,24 +98,40 @@
                                         <tr>
                                             <td>{{$User->id}}</td>
                                             <td>{{$User->Name}}</td>
-                                            <td>{{$User->Img_User}}</td>
+                                            <td><img src="{{asset('storage').'/'.$User->Img_User}}"  alt="Imagen Usuario" width="50" height="50"></td>
                                             <td>{{$User->Email}}</td>
-                                            <td>{{$User->Password}}</td>
                                             <td>{{$User->Matricula}}</td>
-                                            <td>{{$User->Cuatrimeste->Cuatrimestre}}</td>
-                                            <td>{{$User->Direction->Name_Direction}}</td>
-                                            <td>{{$User->Trajectory->Name_Trajectory}}</td>
+                                            <td>{{$User->Cuatrimestre}}</td>
+                                            <td>{{$User->Name_Direction}}</td>
+                                            <td>{{$User->Name_Trajectory}}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                                    <a class="btn btn-success m-3" href="User/{{$User->id}}" ><i class="fa-regular fa-eye"></i></a>
-                                                    <a class="btn btn-warning m-3" href="User/{{$User->id}}/edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                    <form action="User/{{$User->id}}" method="POST">
-                                                    {!! csrf_field() !!}
-                                                    @method("delete")
-                                                        
-                                                    <button class="btn btn-danger m-3" type="submit"><i class="fa-solid fa-trash"></i></button>
-                                                    </form>
-                                                    <!-- <a class="btn btn-danger m-3" data-toggle="modal" data-target="#logoutModal"><i class="fa-solid fa-trash"></i></a> -->
+                                                    <a class="btn btn-outline-info" href="User/{{$User->id}}" ><i class="fa-regular fa-eye"></i></a>
+                                                    <a class="btn btn-outline-warning" href="User/{{$User->id}}/edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                    <a href="" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModalCenter{{$User->id}}"><i class="fa-solid fa-trash"></i></a>
+                                                 
+                                                   
+                                                      <!------ ESTE ES EL MODAL QUE SE MUESTRA AL DAR CLICK EN EL BOTON "ELIMINAR" ------>
+            <div class="modal fade" id="exampleModalCenter{{$User->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-center">
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-center">Está seguro(a) de eliminar el usuario {{$User->id}}?</p>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button type="button" class="btn btn-secondary btn-default" data-dismiss="modal">Cancelar</button>
+                            <form action="User/{{$User->id}}" method="POST">
+                                {!! csrf_field() !!}
+                                @method("delete")
+                                    
+                                <button class="btn btn-danger m-3" type="submit">Aceptar</button>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div><!--fin modal-->
                                         </div>            
                                             </td>
                                         </tr> 
